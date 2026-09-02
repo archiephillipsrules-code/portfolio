@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Archie Phillips — Portfolio</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#F4E9D5;
+    --cream-deep:#EADFC5;
+    --ink:#241F1A;
+    --ink-soft:#4A423A;
+    --peach:#E9B98A;
+    --peach-deep:#D89A5C;
+    --gold:#B8863B;
+    --line: rgba(36,31,26,0.16);
+    --radius: 22px;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  body{
+    background:
+      repeating-linear-gradient(var(--cream), var(--cream) 38px, var(--line) 39px);
+    color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    line-height:1.5;
+    padding-bottom:90px;
+  }
+  h1,h2,h3, .marker{
+    font-family:'Caveat', cursive;
+    font-weight:700;
+    letter-spacing:0.5px;
+  }
+  .wrap{ max-width:1040px; margin:0 auto; padding:0 28px; }
+  a{color:inherit;}
+
+  .card{
+    background:var(--cream-deep);
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius);
+    box-shadow: 6px 6px 0 rgba(36,31,26,0.10);
+    padding:36px 40px;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; font-weight:600; letter-spacing:2px;
+    text-transform:uppercase; color:var(--gold); margin-bottom:10px;
+  }
+  .eyebrow::before{
+    content:''; width:7px;height:7px;border-radius:50%;
+    background:var(--peach-deep); display:inline-block;
+  }
+
+  nav{
+    position:sticky; top:0; z-index:20;
+    background:rgba(244,233,213,0.88);
+    backdrop-filter:blur(6px);
+    border-bottom:2px solid var(--line);
+  }
+  nav .wrap{ display:flex; align-items:center; justify-content:space-between; padding:16px 28px; }
+  .brand{ font-family:'Caveat', cursive; font-weight:700; font-size:26px; }
+  .navlinks{ display:flex; gap:26px; font-size:14px; font-weight:500; }
+  .navlinks a{ text-decoration:none; opacity:0.75; transition:opacity .2s; }
+  .navlinks a:hover{ opacity:1; }
+
+  .hero{
+    padding:72px 0 40px;
+    display:grid; grid-template-columns: 1.15fr 0.85fr;
+    gap:50px; align-items:center;
+  }
+  .hero h1{ font-size:76px; line-height:0.95; margin-bottom:18px; }
+  .hero .tagline{ font-size:18px; color:var(--ink-soft); max-width:440px; margin-bottom:26px; }
+  .hero .years{ font-size:14px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); font-weight:600; }
+  .cta-row{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 24px; border-radius:40px; border:2px solid var(--ink);
+    font-weight:600; font-size:14px; text-decoration:none;
+    background:var(--ink); color:var(--cream); transition:transform .15s ease;
+  }
+  .btn.ghost{ background:transparent; color:var(--ink); }
+  .btn:hover{ transform:translateY(-2px); }
+
+  .vinyl-hero{ position:relative; width:340px; height:340px; margin:0 auto; }
+  .vinyl{
+    width:100%; height:100%; border-radius:50%;
+    background:
+      repeating-radial-gradient(circle at center,
+        #1c1815 0px, #1c1815 3px,
+        #2a2521 3px, #2a2521 6px);
+    border:2px solid var(--ink);
+    position:relative;
+    animation: spin 14s linear infinite;
+  }
+  @media (prefers-reduced-motion: reduce){ .vinyl{ animation:none; } }
+  .vinyl::after{
+    content:''; position:absolute; top:50%; left:50%;
+    width:120px; height:120px; background:var(--peach);
+    border:2px solid var(--ink); border-radius:50%;
+    transform:translate(-50%,-50%);
+  }
+  .vinyl::before{
+    content:''; position:absolute; top:50%; left:50%;
+    width:16px; height:16px; background:var(--cream-deep);
+    border:2px solid var(--ink); border-radius:50%;
+    transform:translate(-50%,-50%); z-index:2;
+  }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+
+  section{ padding:54px 0; }
+  section .sec-head{ margin-bottom:30px; }
+  section h2{ font-size:44px; }
+
+  .two-col{ display:grid; grid-template-columns: 1fr 1fr; gap:34px; }
+  .two-col p{ margin-bottom:14px; color:var(--ink-soft); font-size:15.5px; }
+  .two-col p strong{ color:var(--ink); }
+
+  .tracklist{ display:flex; flex-direction:column; gap:14px; }
+  .track{
+    background:var(--cream-deep); border:2px solid var(--ink);
+    border-radius:16px; overflow:hidden;
+  }
+  .track summary{
+    list-style:none; cursor:pointer;
+    display:flex; align-items:center; gap:20px; padding:20px 26px;
+  }
+  .track summary::-webkit-details-marker{ display:none; }
+  .track-num{ font-family:'Caveat', cursive; font-size:28px; color:var(--gold); width:38px; }
+  .track-title{ flex:1; }
+  .track-title .name{ font-weight:700; font-size:17px; }
+  .track-title .role{ font-size:13.5px; color:var(--ink-soft); }
+  .track-time{ font-size:13px; color:var(--ink-soft); font-variant-numeric:tabular-nums; }
+  .track-play{
+    width:34px; height:34px; border-radius:50%; border:2px solid var(--ink);
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; transition:background .2s;
+  }
+  .track[open] .track-play{ background:var(--peach); }
+  .track-body{ padding:0 26px 24px 84px; font-size:14.5px; color:var(--ink-soft); max-width:600px; }
+
+  .stats-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .stat{
+    background:var(--cream-deep); border:2px solid var(--ink);
+    border-radius:16px; padding:22px 18px; text-align:left;
+  }
+  .stat .num{ font-family:'Caveat', cursive; font-size:44px; color:var(--gold); line-height:1; display:block; }
+  .stat .label{ font-size:13px; color:var(--ink-soft); margin-top:6px; }
+  .bar-decor{
+    height:5px; border-radius:3px; background:var(--peach);
+    margin:14px 0 0; width:0%; transition:width 1.2s ease;
+  }
+
+  .pills{ display:flex; flex-wrap:wrap; gap:12px; }
+  .pill{
+    border:2px solid var(--ink); border-radius:40px; padding:10px 20px;
+    font-size:14px; font-weight:500; background:var(--cream-deep);
+  }
+  .pill.accent{ background:var(--peach); }
+
+  .tools-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(140px,1fr)); gap:14px; }
+  .tool{
+    border:2px dashed var(--line); border-radius:14px; padding:18px;
+    text-align:center; font-weight:600; font-size:14px; color:var(--ink-soft);
+  }
+
+  .campaign-card{ display:flex; align-items:center; justify-content:space-between; gap:30px; flex-wrap:wrap; }
+  .campaign-card h3{ font-size:34px; margin-bottom:6px; }
+  .campaign-card p{ color:var(--ink-soft); font-size:15px; max-width:420px; }
+
+  .contact-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+  .contact-item{
+    border:2px solid var(--ink); border-radius:16px; padding:20px;
+    background:var(--cream-deep); font-weight:600; font-size:14.5px;
+    display:flex; align-items:center; gap:12px; text-decoration:none;
+    transition:transform .15s ease;
+  }
+  .contact-item:hover{ transform:translateY(-2px); }
+  .contact-item .dot{ width:10px;height:10px;border-radius:50%;background:var(--peach-deep); flex-shrink:0; }
+
+  footer{ text-align:center; padding:40px 0 20px; font-size:13px; color:var(--ink-soft); }
+
+  .player{
+    position:fixed; left:0; right:0; bottom:0; z-index:30;
+    background:var(--ink); color:var(--cream); padding:12px 26px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .player .now{ font-size:12.5px; letter-spacing:0.5px; display:flex; flex-direction:column; gap:2px; min-width:170px; }
+  .player .now b{ font-size:13.5px; }
+  .progress-track{ flex:1; height:4px; background:rgba(244,233,213,0.25); border-radius:3px; position:relative; overflow:hidden; }
+  .progress-fill{ position:absolute; left:0; top:0; bottom:0; background:var(--peach); width:0%; }
+  .player .status{ font-size:12px; opacity:0.7; white-space:nowrap; }
+
+  @media (max-width: 860px){
+    .hero{ grid-template-columns:1fr; text-align:center; }
+    .hero h1{ font-size:52px; }
+    .cta-row{ justify-content:center; }
+    .vinyl-hero{ width:220px; height:220px; }
+    .two-col{ grid-template-columns:1fr; }
+    .stats-grid{ grid-template-columns:repeat(2,1fr); }
+    .contact-grid{ grid-template-columns:1fr; }
+    .campaign-card{ flex-direction:column; text-align:center; }
+    .navlinks{ display:none; }
+    .player .now{ min-width:auto; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">Archie Phillips</div>
+    <div class="navlinks">
+      <a href="#experience">Tracklist</a>
+      <a href="#results">Results</a>
+      <a href="#skills">Skills</a>
+      <a href="#campaign">Case Study</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero wrap">
+  <div>
+    <div class="years">2020 — 2026</div>
+    <h1>Portfolio.</h1>
+    <p class="tagline">Digital marketing, CRM and streaming growth for artists and labels — built on data, shaped by four years inside the music industry.</p>
+    <div class="cta-row">
+      <a class="btn" href="#intro">Play the tracklist ▸</a>
+      <a class="btn ghost" href="#contact">Get in touch</a>
+    </div>
+  </div>
+  <div class="vinyl-hero"><div class="vinyl"></div></div>
+</header>
+
+<section id="intro">
+  <div class="wrap two-col">
+    <div class="card">
+      <div class="eyebrow">Track 0 — Intro</div>
+      <h2 style="font-size:30px; margin-bottom:14px;">A passion for music, sport and travel</h2>
+      <p>I've always wanted to try things outside my comfort zone. After university I moved to Australia for a year, then travelled through Asia on the way home.</p>
+      <p><strong>Four years working as a music label assistant</strong> gave me first-hand experience in audience segmentation, data analysis, and evolving trends across social media and fanbases — the experience that helped me find my passion.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Behind the Music</div>
+      <h2 style="font-size:30px; margin-bottom:14px;">My approach</h2>
+      <p>A <strong>chemistry degree</strong> taught me that data is the key metric — test whether campaigns are working, and use that to shape future strategy.</p>
+      <p>I believe in <strong>quality over quantity</strong>: customer data acquisition should help people connect better with a brand, and the product needs to show confidence, identity and self-expression.</p>
+      <p>Known for being organised, collaborative and adaptable — full of curiosity and committed to continuous learning.</p>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Tracklist</div>
+      <h2>Experience</h2>
+    </div>
+    <div class="tracklist">
+
+      <details class="track" open>
+        <summary>
+          <span class="track-num">01</span>
+          <span class="track-title">
+            <span class="name">3Beat Production</span>
+            <span class="role">CRM, Marketing, Streaming</span>
+          </span>
+          <span class="track-time">4:00</span>
+          <span class="track-play">▶</span>
+        </summary>
+        <div class="track-body">
+          Four years across CRM, marketing, digital and streaming — built on UMG's tech stack, written for the streaming era.
+        </div>
+      </details>
+
+      <details class="track">
+        <summary>
+          <span class="track-num">02</span>
+          <span class="track-title">
+            <span class="name">Universal Music</span>
+            <span class="role">Industry grounding</span>
+          </span>
+          <span class="track-time">3:30</span>
+          <span class="track-play">▶</span>
+        </summary>
+        <div class="track-body">
+          Spent two weeks inside major-label CRM, learning how segmentation actually gets built — then kept artist sites live and campaign-ready across multiple UMG labels for over three years.
+        </div>
+      </details>
+
+      <details class="track">
+        <summary>
+          <span class="track-num">03</span>
+          <span class="track-title">
+            <span class="name">Gap Year</span>
+            <span class="role">18 months on the road</span>
+          </span>
+          <span class="track-time">1:30</span>
+          <span class="track-play">▶</span>
+        </summary>
+        <div class="track-body">
+          18 months on the road — a B-side that shaped how I read culture and audiences.
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<section id="results">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Monthly Listeners</div>
+      <h2>Results</h2>
+    </div>
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="num">70%+</span>
+        <span class="label">Increase in mailing list sign-ups for 5+ artists</span>
+        <div class="bar-decor" data-w="80"></div>
+      </div>
+      <div class="stat">
+        <span class="num">20+</span>
+        <span class="label">Campaigns delivered across 4 years with 0 errors</span>
+        <div class="bar-decor" data-w="65"></div>
+      </div>
+      <div class="stat">
+        <span class="num">25%</span>
+        <span class="label">Improved campaign turnaround via audience engagement metrics</span>
+        <div class="bar-decor" data-w="45"></div>
+      </div>
+      <div class="stat">
+        <span class="num">5+</span>
+        <span class="label">CRM systems mastered — Grand Royal, Vice Versa & more</span>
+        <div class="bar-decor" data-w="55"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Instruments</div>
+      <h2>Skills</h2>
+    </div>
+    <div class="pills">
+      <span class="pill accent">Multi-project prioritisation</span>
+      <span class="pill">Cross-team relationships</span>
+      <span class="pill">High volume workload</span>
+      <span class="pill">Grid & database upkeep</span>
+      <span class="pill accent">Deadline-driven campaign tracking</span>
+      <span class="pill">Performance reporting</span>
+      <span class="pill">Discretion with confidential information</span>
+    </div>
+
+    <div style="margin-top:36px;">
+      <div class="eyebrow">Tools</div>
+      <div class="tools-grid">
+        <div class="tool">Shopify</div>
+        <div class="tool">Movable Ink</div>
+        <div class="tool">HubSpot</div>
+        <div class="tool">Microsoft Office</div>
+        <div class="tool">Canva</div>
+        <div class="tool">Grand Royal</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="campaign">
+  <div class="wrap">
+    <div class="card campaign-card">
+      <div>
+        <div class="eyebrow">Mock Campaign</div>
+        <h3>Pokémon × BTS —<br>a hypothetical collab</h3>
+        <p>A self-directed mock campaign, built to show how I'd plan and pitch a major cross-brand collaboration from scratch.</p>
+      </div>
+      <a class="btn" href="https://canva.link/6spx1s444unjstq" target="_blank" rel="noopener">View the case study ▸</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Now Playing — Searching for new opportunities</div>
+      <h2>Get in touch</h2>
+    </div>
+    <div class="contact-grid">
+      <a class="contact-item" href="mailto:5archiephillips@gmail.com"><span class="dot"></span> 5archiephillips@gmail.com</a>
+      <a class="contact-item" href="https://www.linkedin.com/in/archie-phillips-a12244277/" target="_blank" rel="noopener"><span class="dot"></span> LinkedIn</a>
+      <a class="contact-item" href="tel:07535559195"><span class="dot"></span> 07535 559 195</a>
+    </div>
+  </div>
+</section>
+
+<footer>Archie Phillips — Digital Marketing / CRM / Streaming Growth</footer>
+
+<div class="player">
+  <div class="now"><b>Archie Phillips — Portfolio</b><span id="player-status">Scroll to explore</span></div>
+  <div class="progress-track"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="status">2020 – 2026</div>
+</div>
+
+<script>
+  const fill = document.getElementById('progress-fill');
+  const statusEl = document.getElementById('player-status');
+  const sectionNames = {
+    intro:'Track 0 — Intro',
+    experience:'Tracklist — Experience',
+    results:'Monthly Listeners — Results',
+    skills:'Instruments — Skills',
+    campaign:'Mock Campaign',
+    contact:'Now Playing — Contact'
+  };
+  const sections = Object.keys(sectionNames).map(id => document.getElementById(id));
+
+  function onScroll(){
+    const scrollTop = window.scrollY;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const pct = Math.min(100, (scrollTop / docHeight) * 100);
+    fill.style.width = pct + '%';
+
+    let current = 'Scroll to explore';
+    sections.forEach(sec=>{
+      const rect = sec.getBoundingClientRect();
+      if(rect.top < window.innerHeight * 0.5 && rect.bottom > 0){
+        current = sectionNames[sec.id];
+      }
+    });
+    statusEl.textContent = current;
+  }
+  window.addEventListener('scroll', onScroll);
+  onScroll();
+
+  const bars = document.querySelectorAll('.bar-decor');
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.style.width = e.target.dataset.w + '%';
+      }
+    });
+  }, {threshold:0.4});
+  bars.forEach(b=>obs.observe(b));
+</script>
+
+</body>
+</html>
